@@ -1,0 +1,36 @@
+
+
+.navBar {
+    display: flex;
+    padding: 5px 40px;
+    border-bottom: 1px solid #e2e2e2;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navBarItems {
+    display: flex;
+    column-gap: 24px;
+}
+
+.navBarItems a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    column-gap: 10px;
+}
+
+.navBarItems a:hover {
+    background-color: #e2e2e2;
+    border-radius: 10px;
+}
+
+.loginButton{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    justify-content: space-around;
+    border-radius: 10px;
+}
