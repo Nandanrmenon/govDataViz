@@ -65,12 +65,11 @@ const DataPage = () => {
   return (
     <div className='container'>
       <FormControl sx={{ m: 1, minWidth: 200 }}>
-        <InputLabel id="demo-simple-select-label">Select View</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={selectedView}
-          label="Select View"
+          placeholder="Select data"
           autoWidth
           onChange={handleSelectChange}
         >

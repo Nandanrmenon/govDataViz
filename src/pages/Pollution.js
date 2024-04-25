@@ -1,12 +1,7 @@
 import React from 'react'
 import { Chart } from "react-google-charts";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import Table from '@mui/joy/Table';
+
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 
@@ -17,44 +12,42 @@ function PollutionView({ data }) {
     chartData.push([record.city, parseFloat(record.pollutant_avg)]);
   });
   return (<div className='container'>
-    <h3>Real time Air Quality Index from various locations</h3>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 450 }} aria-label="sticky table" stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell>State</TableCell>
-            <TableCell align="">City</TableCell>
-            <TableCell align="">Station</TableCell>
-            <TableCell align="right">Last Updated</TableCell>
-            <TableCell align="right">Latitude</TableCell>
-            <TableCell align="right">Longitude</TableCell>
-            <TableCell align="right">Pollutant Id</TableCell>
-            <TableCell align="right">Pollutant - Min</TableCell>
-            <TableCell align="right">Pollutant - Max</TableCell>
-            <TableCell align="right">Pollutant - Avg</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    <h3>Real time Air Quality Index from various locations</h3> 
+    <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
+        <thead>
+          <tr>
+            <td>State</td>
+            <td>City</td>
+            <td>Station</td>
+            <td>Last Updated</td>
+            <td>Latitude</td>
+            <td>Longitude</td>
+            <td>Pollutant Id</td>
+            <td>Pollutant - Min</td>
+            <td>Pollutant - Max</td>
+            <td>Pollutant - Avg</td>
+          </tr>
+        </thead>
+        <tbody>
           {data.map((record, index) => (
-            <TableRow
+            <tr
               key={index}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">{record.state}</TableCell>
-              <TableCell align="">{record.city}</TableCell>
-              <TableCell align="">{record.station}</TableCell>
-              <TableCell align="right">{record.last_update}</TableCell>
-              <TableCell align="right">{record.latitude}</TableCell>
-              <TableCell align="right">{record.longitude}</TableCell>
-              <TableCell align="right">{record.pollutant_id}</TableCell>
-              <TableCell align="right">{record.pollutant_min}</TableCell>
-              <TableCell align="right">{record.pollutant_max}</TableCell>
-              <TableCell align="right">{record.pollutant_avg}</TableCell>
-            </TableRow>
+              <td>{record.state}</td>
+              <td>{record.city}</td>
+              <td>{record.station}</td>
+              <td>{record.last_update}</td>
+              <td>{record.latitude}</td>
+              <td>{record.longitude}</td>
+              <td>{record.pollutant_id}</td>
+              <td>{record.pollutant_min}</td>
+              <td>{record.pollutant_max}</td>
+              <td>{record.pollutant_avg}</td>
+            </tr>
           ))}
-        </TableBody>
+        </tbody>
       </Table>
-    </TableContainer>
     <Divider />
     <Box sx={{ p: 4 }}>
       <Chart
