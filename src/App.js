@@ -12,7 +12,7 @@ function App() {
   return (
 
     <div className="App">
-      {/* <NavBar /> */}
+      <NavBar />
       <Container maxWidth="lg">
         <Routes >
           <Route path='/' element={<Home />} />

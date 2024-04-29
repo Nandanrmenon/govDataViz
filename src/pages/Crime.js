@@ -10,26 +10,37 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import Box from '@mui/material/Box';
+import Modal from '@mui/joy/Modal';
+import ModalClose from '@mui/joy/ModalClose';
+import ModalDialog from '@mui/joy/ModalDialog';
+import DialogTitle from '@mui/joy/DialogTitle';
+import DialogContent from '@mui/joy/DialogContent';
+import { Button } from '@mui/joy';
 
-function Crime({ data }) {
+function CrimeOne({ data }) {
   const chartData = [['Year', 'Pollutant Avg']];
+  const [layout, setLayout] = React.useState(undefined);
   data.forEach(record => {
-    const year = new Date(record.year).getFullYear();
-    chartData.push([year, parseFloat(record.quantity_000_metric_tonnes_)]);
+    chartData.push([record.city, parseFloat(record.murder__sec_302_ipc____col__3_)]);
   });
   return (<div className='container'>
     <h3>Monthly Consumption of Petroleum Products</h3>
-
+    <Button
+      variant="outlined"
+      color="neutral"
+      onClick={() => {
+        setLayout('fullscreen');
+      }}>{'View Graph'}</Button>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 450 }} aria-label="sticky table" stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>Month</TableCell>
-            <TableCell align="right">Year</TableCell>
-            <TableCell align="right">Products</TableCell>
-            <TableCell align="right">Quantity Metric Tonnes</TableCell>
-            <TableCell align="right">Updated Date</TableCell>
+            <TableCell>City</TableCell>
+            <TableCell align="right">Murder sec 302 IPC</TableCell>
+            <TableCell align="right">Culpable Homicide Not Amounting to Murder Sec 304 IPC</TableCell>
+            <TableCell align="right">Infanticide Sec 315 IPC</TableCell>
+            <TableCell align="right">Foeticide Sec 316 IPC</TableCell>
+            <TableCell align="right">Dowry Deaths Sec 304b IPC</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -38,32 +49,41 @@ function Crime({ data }) {
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">{record._month_}</TableCell>
-              <TableCell align="right">{record.year}</TableCell>
-              <TableCell align="right">{record.products}</TableCell>
-              <TableCell align="right">{record.quantity_000_metric_tonnes_}</TableCell>
-              <TableCell align="right">{record.updated_date}</TableCell>
+              <TableCell component="th" scope="row">{record.city}</TableCell>
+              <TableCell align="right">{record.murder__sec_302_ipc____col__3_}</TableCell>
+              <TableCell align="right">{record.culpable_homicide_not_amounting_to_murder__sec_304_ipc____col__4_}</TableCell>
+              <TableCell align="right">{record.infanticide__sec_315_ipc____col__5_}</TableCell>
+              <TableCell align="right">{record.foeticide__sec_316_ipc____col__6_}</TableCell>
+              <TableCell align="right">{record.dowry_deaths__sec_304b_ipc____col__7_}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     <Divider />
-    <Box sx={{ p: 4 }}>
-      <Chart
-        chartType="LineChart"
-        data={chartData}
-        width="100%"
-        height="400px"
-        options={{
-          title: 'Pollutant Average Over Time',
-          hAxis: { title: 'Year', minValue: '2017', maxValue: '2021' },
-          vAxis: { title: 'Pollutant Avg' },
-        }}
-      />
-    </Box>
+    <Modal open={!!layout} onClose={() => setLayout(undefined)}>
+      <ModalDialog layout={layout}>
+        <ModalClose />
+        <DialogTitle>Graph Viewer</DialogTitle>
+        <DialogContent>
+          <div>
+            <Chart
+              chartType="PieChart"
+              data={chartData}
+              width="100%"
+              height="400px"
+              options={{
+                title: 'Crime Head-wise Number of Voilent Crimes in Metropolitan Cities during 2022',
+                hAxis: { title: 'City', minValue: 2017, maxValue: 2021 },
+                vAxis: { title: 'Pollutant Avg' },
+              }}
+            />
+          </div>
+        </DialogContent>
+      </ModalDialog>
+    </Modal>
   </div>
   );
 }
 
-export default Crime
+export default CrimeOne

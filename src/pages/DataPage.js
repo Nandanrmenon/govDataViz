@@ -9,12 +9,14 @@ import '../styles/Products.css'
 
 import PollutionView from './Pollution';
 import PetroleumView from './Petroleum';
+import CrimeOne from './Crime';
 
 const DataPage = () => {
   const [data, setData] = useState([]);
   const [selectedView, setSelectedView] = useState(null);
   const kPollution = 'https://api.data.gov.in/resource/3b01bcb8-0b14-4abf-b6f2-c1bfd384ba69?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json';
   const kPetroluem = 'https://api.data.gov.in/resource/7b624b4a-1456-4945-80d0-dfb5e40ddcff?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json';
+  const kCrime = 'https://api.data.gov.in/resource/f1011105-a719-426e-80bc-b1c734b59948?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json';
   const [kApi, setKApi] = useState(null);
 
 
@@ -46,6 +48,8 @@ const DataPage = () => {
         return setKApi(kPollution);
       case 'petroleum':
         return setKApi(kPetroluem);
+      case 'crimeone':
+        return setKApi(kCrime);
       default:
         return null;
     }
@@ -64,6 +68,7 @@ const DataPage = () => {
 
   return (
     <div className='container'>
+      <p>Select one to see the data</p>
       <FormControl sx={{ m: 1, minWidth: 200 }}>
         <Select
           labelId="demo-simple-select-label"
@@ -75,6 +80,7 @@ const DataPage = () => {
         >
           <MenuItem value={'pollution'}>Real time Air Quality Index from various locations</MenuItem>
           <MenuItem value={'petroleum'}>Monthly Consumption of Petroleum Products</MenuItem>
+          <MenuItem value={'crimeone'}>Crime Head-wise Number of Voilent Crimes in Metropolitan Cities during 2022</MenuItem>
           {/* <MenuItem value={30}>Thirty</MenuItem> */}
         </Select>
       </FormControl>
@@ -82,6 +88,7 @@ const DataPage = () => {
 
       {selectedView === "pollution" && kApi === kPollution && <PollutionView data={data} />}
       {selectedView === "petroleum" && kApi === kPetroluem && <PetroleumView data={data} />}
+      {selectedView === "crimeone" && kApi === kCrime && <CrimeOne data={data} />}
     </div>
   );
 };
