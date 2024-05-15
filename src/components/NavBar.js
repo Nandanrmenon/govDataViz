@@ -243,15 +243,12 @@ function NavBar() {
             Settings
           </MenuItem>
           <ListDivider />
-          <MenuItem component="a" href="/blog/first-look-at-joy/">
-            First look at Joy UI
-            <OpenInNewRoundedIcon />
-          </MenuItem>
           <MenuItem
             component="a"
-            href="https://github.com/mui/material-ui/tree/master/docs/data/joy/getting-started/templates/email"
+            target='_blank'
+            href="https://github.com/Nandanrmenon/govDataViz.git"
           >
-            Sourcecode
+            Source Code
             <OpenInNewRoundedIcon />
           </MenuItem>
           <ListDivider />
