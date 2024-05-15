@@ -1,59 +1,104 @@
-*{
+* {
   margin: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.App {
-
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-
-.collapse{
+.collapse {
   display: none;
 }
-.rots{
-  width: 200px;
-  background-color: red;
-  height: 200px;
-  transition: width 1s, height 1s,2s;
+
+
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+/* Select */
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+.custom-select {
+  appearance: none;
+  /* Remove default arrow */
+  -webkit-appearance: none;
+  /* For older versions of Safari */
+  -moz-appearance: none;
+  /* For older versions of Firefox */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  /* background-color: #f4f4f4; */
+  /* Light gray background */
+  cursor: pointer;
 }
-.rots:hover{
-  /* width: 600px; */
-  /* height: 600px; */
-  transform: rotateY(45deg);
+
+/* Style for the options */
+.custom-select option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Optional: Add hover effect */
+.custom-select:hover {
+  border-color: #999;
+  /* Darker gray border on hover */
+}
+
+/* Optional: Add focus effect */
+.custom-select:focus {
+  outline: none;
+  border-color: #007bff;
+  /* Blue border when focused */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  /* Add focus ring */
+}
+
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+/* Table */
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+.mac-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mac-table th,
+.mac-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  /* Light gray border between rows */
+}
+
+.mac-table th {
+  background-color: #f4f4f4;
+  /* Light gray background for header */
+  font-weight: bold;
+  text-align: left;
+}
+
+.mac-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+  /* Alternate row background color */
+}
+
+.mac-table tbody tr:hover {
+  background-color: #eaeaea;
+  /* Darker background color on hover */
 }

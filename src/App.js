@@ -5,20 +5,19 @@ import 'react-material-symbols/rounded'; // Place in your root app file. There a
 import Home from './pages/Home';
 import DataPage from './pages/DataPage';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Login from './pages/Login';
 
 function App() {
 
   return (
-
     <div className="App">
       {/* <NavBar /> */}
-      <Container maxWidth="lg">
+      
         <Routes >
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Login />} />
           <Route path='datapage' element={<DataPage />} />
+          {/* <Route path='login' element={<Login />} /> */}
         </Routes>
-      </Container>
     </div>
   );
 }

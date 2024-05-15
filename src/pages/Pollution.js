@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
 import Table from '@mui/joy/Table';
 
@@ -10,43 +10,48 @@ import ModalClose from '@mui/joy/ModalClose';
 import ModalDialog from '@mui/joy/ModalDialog';
 import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
-import { Button } from '@mui/joy';
+import { Button, Stack } from '@mui/joy';
 function PollutionView({ data }) {
   const chartData = [['Year', 'Pollutant Avg']];
   const [layout, setLayout] = React.useState(undefined);
+
   data.forEach(record => {
     // const year = new Date(record.last_update).getFullYear();
     chartData.push([record.city, parseFloat(record.pollutant_avg)]);
   });
   return (<div className='container'>
-    <h3>Real time Air Quality Index from various locations</h3>
-    <Button
-      variant="outlined"
-      color="neutral"
-      onClick={() => {
-        setLayout('fullscreen');
-      }}>{'View Graph'}</Button>
-    <Table sx={{ '& thead th:nth-child(1)': { width: '40%' } }}>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      spacing={2}>
+      <h3>Real time Air Quality Index from various locations</h3>
+      <Button
+        variant="soft"
+        onClick={() => {
+          setLayout('fullscreen');
+        }}>{'View Graph'}</Button>
+
+    </Stack>
+    <Table variant={'soft'}>
       <thead>
         <tr>
-          <td>State</td>
-          <td>City</td>
-          <td>Station</td>
-          <td>Last Updated</td>
-          <td>Latitude</td>
-          <td>Longitude</td>
-          <td>Pollutant Id</td>
-          <td>Pollutant - Min</td>
-          <td>Pollutant - Max</td>
-          <td>Pollutant - Avg</td>
+          <th>State</th>
+          <th>City</th>
+          <th>Station</th>
+          <th>Last Updated</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Pollutant Id</th>
+          <th>Pollutant - Min</th>
+          <th>Pollutant - Max</th>
+          <th>Pollutant - Avg</th>
         </tr>
       </thead>
       <tbody>
         {data.map((record, index) => (
           <tr
-            key={index}
-          // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-          >
+            key={index}>
             <td>{record.state}</td>
             <td>{record.city}</td>
             <td>{record.station}</td>
@@ -61,10 +66,6 @@ function PollutionView({ data }) {
         ))}
       </tbody>
     </Table>
-    <Divider />
-    <Box sx={{ p: 4 }}>
-
-    </Box>
     <Modal open={!!layout} onClose={() => setLayout(undefined)}>
       <ModalDialog layout={layout}>
         <ModalClose />

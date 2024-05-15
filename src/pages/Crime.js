@@ -2,20 +2,15 @@ import React from 'react'
 import { Chart } from "react-google-charts";
 import '../App.css';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
+import Table from '@mui/joy/Table';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import ModalDialog from '@mui/joy/ModalDialog';
 import DialogTitle from '@mui/joy/DialogTitle';
 import DialogContent from '@mui/joy/DialogContent';
 import { Button } from '@mui/joy';
+
+import Stack from '@mui/joy/Stack';
 
 function CrimeOne({ data }) {
   const chartData = [['Year', 'Pollutant Avg']];
@@ -24,43 +19,44 @@ function CrimeOne({ data }) {
     chartData.push([record.city, parseFloat(record.murder__sec_302_ipc____col__3_)]);
   });
   return (<div className='container'>
-    <h3>Monthly Consumption of Petroleum Products</h3>
-    <Button
-      variant="outlined"
-      color="neutral"
-      onClick={() => {
-        setLayout('fullscreen');
-      }}>{'View Graph'}</Button>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 450 }} aria-label="sticky table" stickyHeader>
-        <TableHead>
-          <TableRow>
-            <TableCell>City</TableCell>
-            <TableCell align="right">Murder sec 302 IPC</TableCell>
-            <TableCell align="right">Culpable Homicide Not Amounting to Murder Sec 304 IPC</TableCell>
-            <TableCell align="right">Infanticide Sec 315 IPC</TableCell>
-            <TableCell align="right">Foeticide Sec 316 IPC</TableCell>
-            <TableCell align="right">Dowry Deaths Sec 304b IPC</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((record, index) => (
-            <TableRow
-              key={index}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">{record.city}</TableCell>
-              <TableCell align="right">{record.murder__sec_302_ipc____col__3_}</TableCell>
-              <TableCell align="right">{record.culpable_homicide_not_amounting_to_murder__sec_304_ipc____col__4_}</TableCell>
-              <TableCell align="right">{record.infanticide__sec_315_ipc____col__5_}</TableCell>
-              <TableCell align="right">{record.foeticide__sec_316_ipc____col__6_}</TableCell>
-              <TableCell align="right">{record.dowry_deaths__sec_304b_ipc____col__7_}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <Divider />
+
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      spacing={2}>
+      <h3>Crime Head-wise Number of Voilent Crimes in Metropolitan Cities during 2022</h3>
+      <Button
+        variant="soft"
+        onClick={() => {
+          setLayout('fullscreen');
+        }}>{'View Graph'}</Button>
+
+    </Stack>
+    <Table variant={'soft'}>
+      <thead>
+        <tr>
+          <th>City</th>
+          <th>Murder sec 302 IPC</th>
+          <th>Culpable Homicide Not Amounting to Murder Sec 304 IPC</th>
+          <th>Infanticide Sec 315 IPC</th>
+          <th>Foeticide Sec 316 IPC</th>
+          <th>Dowry Deaths Sec 304b IPC</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((record, index) => (
+          <tr key={index}>
+            <td>{record.city}</td>
+            <td>{record.murder__sec_302_ipc____col__3_}</td>
+            <td>{record.culpable_homicide_not_amounting_to_murder__sec_304_ipc____col__4_}</td>
+            <td>{record.infanticide__sec_315_ipc____col__5_}</td>
+            <td>{record.foeticide__sec_316_ipc____col__6_}</td>
+            <td>{record.dowry_deaths__sec_304b_ipc____col__7_}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
     <Modal open={!!layout} onClose={() => setLayout(undefined)}>
       <ModalDialog layout={layout}>
         <ModalClose />

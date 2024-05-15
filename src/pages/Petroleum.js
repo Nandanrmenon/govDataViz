@@ -4,7 +4,7 @@ import '../App.css';
 
 import Table from '@mui/joy/Table';
 import Divider from '@mui/material/Divider';
-import { Button } from '@mui/joy';
+import { Button, Stack } from '@mui/joy';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import ModalDialog from '@mui/joy/ModalDialog';
@@ -19,16 +19,20 @@ function PetroleumView({ data }) {
     chartData.push([year, parseFloat(record.quantity_000_metric_tonnes_)]);
   });
   return (<div className='container'>
-    <h3>Monthly Consumption of Petroleum Products</h3>
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      spacing={2}>
+      <h3>Monthly Consumption of Petroleum Products</h3>
+      <Button
+        variant="soft"
+        onClick={() => {
+          setLayout('fullscreen');
+        }}>{'View Graph'}</Button>
 
-    <Button
-      variant="outlined"
-      color="neutral"
-      onClick={() => {
-        setLayout('fullscreen');
-      }}>{'View Graph'}</Button>
-
-    <Table aria-label="basic table" stickyHeader>
+    </Stack>
+    <Table variant={'soft'}>
       <thead>
         <tr>
           <th>Month</th>
@@ -41,16 +45,15 @@ function PetroleumView({ data }) {
       <tbody>
         {data.map((record, index) => (
           <tr key={index}>
-            <th>{record._month_}</th>
-            <th>{record.year}</th>
-            <th>{record.products}</th>
-            <th>{record.quantity_000_metric_tonnes_}</th>
-            <th>{record.updated_date}</th>
+            <td>{record._month_}</td>
+            <td>{record.year}</td>
+            <td>{record.products}</td>
+            <td>{record.quantity_000_metric_tonnes_}</td>
+            <td>{record.updated_date}</td>
           </tr>
         ))}
       </tbody>
     </Table>
-    <Divider />
     <Modal open={!!layout} onClose={() => setLayout(undefined)}>
       <ModalDialog layout={layout}>
         <ModalClose />
@@ -64,7 +67,7 @@ function PetroleumView({ data }) {
               height="400px"
               options={{
                 title: 'Pollutant Average Over Time',
-                hAxis: { title: 'Year', minValue: '2017', maxValue: '2021' },
+                hAxis: { title: 'Year', minValue: '2021', maxValue: '2021' },
                 vAxis: { title: 'Pollutant Avg' },
               }}
             />
